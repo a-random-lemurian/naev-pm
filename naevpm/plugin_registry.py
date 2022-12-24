@@ -33,3 +33,5 @@ def get_registries_from_database():
     check_database()
     db = sqlite3.connect(NaevPMDirectories.DATABASE)
     cur = db.cursor()
+    cur.execute("SELECT * FROM registry")
+    return cur.fetchall()
