@@ -33,9 +33,9 @@ def set_key(key: str, val):
     db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
     cur = db.cursor()
     if get_key(key) is None:
-        cur.execute("UPDATE keyval SET value = ? WHERE key = ?", [val, key])
-    else:
         cur.execute("INSERT INTO keyval VALUES (?,?)", [key, val])
+    else:
+        cur.execute("UPDATE keyval SET value = ? WHERE key = ?", [val, key])
     db.commit()
     db.close()
 
