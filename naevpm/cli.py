@@ -39,7 +39,7 @@ are subject to manual human review to prevent malicious or offensive plugins.\
 @registry.command("add")
 @click.argument('clone_url')
 def registry_add(clone_url):
-    """"Add a new registry""""
+    """"Add a new registry"""
     if clone_url not in TRUSTED:
         print(UNTRUSTED_WARNING, file=stderr)
 
