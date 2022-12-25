@@ -45,4 +45,4 @@ def get_key(key: str):
     cur.execute("SELECT * FROM keyval WHERE key = ?", [key,])
     results = cur.fetchone()
     db.close()
-    return results
+    return results[0]
