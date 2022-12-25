@@ -18,7 +18,12 @@ def list_all_plugins():
 
 
 def all_xml_files_in_directory(dir: str):
-    return [filename for filename in os.listdir(dir) if filename.endswith('.xml')]
+    xmls = []
+    for root, dirs, files in os.walk(dir):
+        for file in files:
+            if (file.endswith('.xml')):
+                xmls.append(os.path.realpath(file))
+    return xmls
 
 
 def parse_plugin_xml_file(file):
