@@ -1,6 +1,6 @@
 import os
 from naevpm import plugin_registry
-import xml.etree.cElementTree as ET
+import lxml.etree as etree
 
 PLUGIN_DIR = "plugins"
 
@@ -26,10 +26,9 @@ def all_xml_files_in_directory(dir: str):
 
 
 def parse_plugin_xml_file(file):
-    tree = ET.parse(file)
-    plugin = tree.getroot()
+    plugin = etree.XML(open(file).read().encode())
     return {
-        "name": plugin.attrib.get("name"),
+        "name": plugin.get("name"),
         "author": plugin.findtext("author"),
         "git": plugin.findtext("git")
     }
