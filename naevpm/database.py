@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS registry (
 """
 
 def init_database():
-    print(naevpm.directories.NaevPMDirectories.DATABASE)
     db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
     cur = db.cursor()
     cur.executescript(SCHEMA)
