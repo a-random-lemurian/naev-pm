@@ -45,7 +45,7 @@ def git_repository_pull(repo, remote_name='origin', branch='main'):
 
 def update_one_registry(registry_dir: str):
     repo = git.Repository(registry_dir)
-    print(f"Updating registry ${registry_dir}")
+    print(f"Updating registry {registry_dir}")
     git_repository_pull(repo)
 
 
