@@ -1,5 +1,7 @@
 import pygit2 as git
+import datetime
 from naevpm import plugin_registry
+from naevpm.database import set_key
 
 
 # Taken from <https://github.com/MichaelBoselowitz/pygit2-examples/blob/master/examples.py>
@@ -54,6 +56,12 @@ def update_registries():
     Update the registries to receive updated information
     from the GitHub plugin registries.
     """
+
+    # Set the last time the plugin registry was updated,
+    # so the player can be reminded again in a week.
+    now = datetime.datetime.now()
+    set_key("last_registry_update_time", now.strftime("%Y-%m-%dT%H:%M:%S"))
+
     for registry in plugin_registry.get_registries_from_database():
         update_one_registry(registry[1])
 

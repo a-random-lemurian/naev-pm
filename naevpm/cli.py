@@ -1,16 +1,37 @@
 import argparse as ap
+from datetime import datetime
 from sys import stderr
 import pygit2 as git
 import click
+from naevpm.database import get_key
 from naevpm.plugin import list_all_plugins
 
 import naevpm.plugin_registry
 from naevpm.update import update_registries
 
 
+def reminders():
+    registry_update_reminder()
+
+
+def registry_update_reminder():
+    # Remind the player to update their registries once in a while.
+    last_update_timestamp = get_key("last_registry_update_time")
+    if last_update_timestamp is None:
+        return
+    now = datetime.now()
+    last_update_time = datetime.fromisoformat(last_update_timestamp)
+    delta = now - last_update_time
+
+    if delta.days >= 7:
+        print("It has been more than 7 days since you last updated your local package registry.")
+        print("To update, run naevpm registry update. Updating is recommended to keep")
+        print("up to date on the latest plugins for Naev.")
+
+
 @click.group()
 def root():
-    pass
+    reminders()
 
 
 @root.group()
