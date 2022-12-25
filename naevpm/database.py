@@ -48,4 +48,4 @@ def get_key(key: str):
     db.close()
     if results is None:
         return None
-    return results[0]
+    return results[1]
