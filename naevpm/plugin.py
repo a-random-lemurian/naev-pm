@@ -22,7 +22,7 @@ def all_xml_files_in_directory(dir: str):
     for root, dirs, files in os.walk(dir):
         for file in files:
             if (file.endswith('.xml')):
-                xmls.append(os.path.realpath(file))
+                xmls.append(file)
     return xmls
 
 
