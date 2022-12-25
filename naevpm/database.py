@@ -36,6 +36,7 @@ def set_key(key: str, val):
         cur.execute("UPDATE keyval SET value = ? WHERE key = ?", [val, key])
     else:
         cur.execute("INSERT INTO keyval VALUES (?,?)", [key, val])
+    db.commit()
     db.close()
 
 
