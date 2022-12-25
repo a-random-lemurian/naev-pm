@@ -7,6 +7,10 @@ CREATE TABLE IF NOT EXISTS registry (
     clone_url            text,
     repo_path            text
 );
+CREATE TABLE IF NOT EXISTS keyval (
+    key                  text
+    value                any
+);
 """
 
 def init_database():
@@ -19,6 +23,26 @@ def init_database():
     db.commit()
     db.close()
 
+
 def check_database():
     naevpm.directories.init_directories()
     init_database()
+
+
+def set_key(key: str, val):
+    db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
+    cur = db.cursor()
+    if get_key(key) is None:
+        cur.execute("UPDATE keyval SET value = ? WHERE key = ?", [val, key])
+    else:
+        cur.execute("INSERT INTO keyval VALUES (?,?)", [key, val])
+    db.close()
+
+
+def get_key(key: str):
+    db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
+    cur = db.cursor()
+    cur.execute("SELECT * FROM keyval WHERE key = ?", [key,])
+    results = cur.fetchone()
+    db.close()
+    return results
