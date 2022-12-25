@@ -1,4 +1,4 @@
-# NAEV PLUGIN MANAGER
+# NAEV PACKAGE MANAGER
 > **Warning**
 > **This is a proof of concept.** naev-pm is extreme alpha and not production ready at all.
 
