@@ -37,8 +37,9 @@ are subject to manual human review to prevent malicious or offensive plugins.\
 
 
 @registry.command("add")
-@click.argument('clone_url', help="Add a new registry")
+@click.argument('clone_url')
 def registry_add(clone_url):
+    """"Add a new registry""""
     if clone_url not in TRUSTED:
         print(UNTRUSTED_WARNING, file=stderr)
 
@@ -54,8 +55,9 @@ def plugin():
     pass
 
 
-@plugin.command(name='ls', help="List all plugins in all registries installed")
+@plugin.command(name='ls')
 def plugin_ls():
+    """List all plugins in all registries installed"""
     plugins = list_all_plugins()
 
     print(f"{'Plugin':<40}{'Author':<30}{'Git URL'}")
