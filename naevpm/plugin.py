@@ -13,8 +13,7 @@ def list_all_plugins():
     for registry in registries:
         plugins += all_plugins_in_registry(registry[1])
 
-    for plugin in plugins:
-        print(plugin)
+    return plugins
 
 
 def all_xml_files_in_directory(dir: str):
