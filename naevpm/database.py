@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS registry (
     repo_path            text
 );
 CREATE TABLE IF NOT EXISTS keyval (
-    key                  text
+    key                  text,
     value                any
 );
 """
