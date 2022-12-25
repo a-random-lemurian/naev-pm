@@ -30,7 +30,9 @@ def parse_plugin_xml_file(file):
     return {
         "name": plugin.get("name"),
         "author": plugin.findtext("author"),
-        "git": plugin.findtext("git")
+        "git": plugin.findtext("git"),
+        "license": plugin.findtext("license"),
+        "website": plugin.findtext("website")
     }
 
 
