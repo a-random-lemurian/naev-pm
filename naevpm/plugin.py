@@ -1,5 +1,5 @@
 import os
-from naevpm import plugin_registry
+from naevpm import database, plugin_registry
 import lxml.etree as etree
 
 PLUGIN_DIR = "plugins"
@@ -14,6 +14,11 @@ def list_all_plugins():
         plugins += all_plugins_in_registry(registry[1])
 
     return plugins
+
+
+def update_plugin_list(plugins):
+    for plugin in plugins:
+        database.add_plugin_to_database(plugin)
 
 
 def all_xml_files_in_directory(dir: str):
@@ -40,3 +45,7 @@ def all_plugins_in_registry(registry_dir):
     return [parse_plugin_xml_file(os.path.join(registry_dir, PLUGIN_DIR, xml_file))
             for xml_file in all_xml_files_in_directory(
                 os.path.join(registry_dir, PLUGIN_DIR))]
+
+
+def install_plugin():
+    pass

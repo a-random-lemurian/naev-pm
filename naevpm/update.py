@@ -2,6 +2,7 @@ import pygit2 as git
 import datetime
 from naevpm import plugin_registry
 from naevpm.database import set_key
+from naevpm.plugin import list_all_plugins, update_plugin_list
 
 
 # Taken from <https://github.com/MichaelBoselowitz/pygit2-examples/blob/master/examples.py>
@@ -65,3 +66,4 @@ def update_registries():
     for registry in plugin_registry.get_registries_from_database():
         update_one_registry(registry[1])
 
+    update_plugin_list(list_all_plugins())
