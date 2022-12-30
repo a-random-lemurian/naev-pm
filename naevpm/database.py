@@ -41,7 +41,7 @@ def check_database():
     init_database()
 
 
-def add_plugin_to_database(plugin):
+def add_plugin_to_database(plugin, commit=True):
     cur = db.cursor()
     cur.execute("""SELECT * FROM plugin WHERE name = ?""", [plugin.get("name")])
     if cur.fetchone() is not None:
@@ -61,7 +61,9 @@ def add_plugin_to_database(plugin):
             False
         ]
     )
-    db.commit()
+
+    if commit:
+        db.commit()
     pass
 
 

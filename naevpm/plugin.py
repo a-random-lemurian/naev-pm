@@ -20,7 +20,8 @@ def list_all_plugins():
 
 def update_plugin_list(plugins):
     for plugin in plugins:
-        database.add_plugin_to_database(plugin)
+        database.add_plugin_to_database(plugin, commit=False)
+    database.db.commit()
 
 
 def all_xml_files_in_directory(dir: str):
