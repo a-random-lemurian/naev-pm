@@ -1,5 +1,7 @@
 import os
+import pygit2 as git
 from naevpm import database, plugin_registry
+from naevpm.directories import NaevPMDirectories
 import lxml.etree as etree
 
 PLUGIN_DIR = "plugins"
@@ -47,5 +49,7 @@ def all_plugins_in_registry(registry_dir):
                 os.path.join(registry_dir, PLUGIN_DIR))]
 
 
-def install_plugin():
-    pass
+def install_plugin(plugin):
+    database.set_plugin_install_status(plugin, 1)
+    git.clone_repository(plugin.get("git"), os.path.join(NaevPMDirectories.NAEV_PLUGIN_DIR, plugin.get("name")))
+

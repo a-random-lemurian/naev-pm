@@ -4,7 +4,7 @@ from sys import stderr
 import pygit2 as git
 import click
 from naevpm.database import get_key
-from naevpm.plugin import list_all_plugins
+from naevpm.plugin import install_plugin, list_all_plugins
 
 import naevpm.plugin_registry
 from naevpm.update import update_registries
@@ -85,6 +85,21 @@ def plugin_ls():
     print("-"*100)
     for plugin in plugins:
         print(f"{plugin.get('name'):<40}{plugin.get('author'):<30}{plugin.get('git')}")
+
+
+@plugin.command(name='install')
+@click.argument("plugin_name")
+def plugin_install(plugin_name):
+    """Install a plugin"""
+    plugins = list_all_plugins()
+
+    for plugin in plugins:
+        if plugin_name.lower() in plugin.get("name").lower():
+            print("Install "+plugin.get("name")+" by "+plugin.get("author")+"? (y/n) ",end='')
+            if input()[0].lower().strip() == 'y':
+                print("Installing...")
+                install_plugin(plugin)
+                exit(0)
 
 
 if __name__ == '__main__':

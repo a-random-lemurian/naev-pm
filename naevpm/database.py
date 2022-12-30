@@ -66,6 +66,34 @@ def add_plugin_to_database(plugin):
     pass
 
 
+def set_plugin_install_status(plugin, status):
+    db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
+    cur = db.cursor()
+    cur.execute("""UPDATE plugin SET installed = ? WHERE name = ?""", [
+        status,
+        plugin.get("name")
+    ])
+
+
+def get_plugin_install_status(plugin):
+    db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
+    cur = db.cursor()
+    cur.execute("""SELECT installed FROM plugin WHERE name = ?""", [
+        plugin.get("name")
+    ])
+    return cur.fetchone()[0]
+
+
+def plugin_set_install_directory(plugin, directory):
+    db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
+    cur = db.cursor()
+    cur.execute("""SELECT installed FROM plugin WHERE name = ?""", [
+        plugin.get("name")
+    ])
+    db.commit()
+    db.close()
+
+
 def set_key(key: str, val):
     db = sqlite3.connect(naevpm.directories.NaevPMDirectories.DATABASE)
     cur = db.cursor()
